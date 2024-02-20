@@ -1,25 +1,41 @@
 import heapq
 
-# Example 1: Min-heap with integers
-int_heap = []
-heapq.heappush(int_heap, 10)
-heapq.heappush(int_heap, 5)
-heapq.heappush(int_heap, 7)
-print("Min element:", int_heap[0])  # Output: 5
-print("Heap:", int_heap)  # Output: [5, 10, 7]
+class GenericHeap:
+    def __init__(self):
+        self.heap = []
 
-# Example 2: Min-heap with floats
-float_heap = []
-heapq.heappush(float_heap, 3.14)
-heapq.heappush(float_heap, 1.2)
-heapq.heappush(float_heap, 2.71)
-print("Min element:", float_heap[0])  # Output: 1.2
-print("Heap:", float_heap)  # Output: [1.2, 3.14, 2.71]
+    def push(self, item):
+        heapq.heappush(self.heap, item)
 
-# Example 3: Min-heap with custom data structures (e.g., tuples)
-custom_heap = []
-heapq.heappush(custom_heap, (3, "Alice"))
-heapq.heappush(custom_heap, (1, "Bob"))
-heapq.heappush(custom_heap, (2, "Charlie"))
-print("Min element:", custom_heap[0])  # Output: (1, 'Bob')
-print("Heap:", custom_heap)  # Output: [(1, 'Bob'), (3, 'Alice'), (2, 'Charlie')]
+    def pop(self):
+        return heapq.heappop(self.heap)
+
+    def peek(self):
+        if self.heap:
+            return self.heap[0]
+        else:
+            return None
+
+# Example usage:
+
+# Create a heap instance
+heap = GenericHeap()
+
+# Push various types of data into the heap
+heap.push(10)
+heap.push(5.5)
+heap.push("hello")
+heap.push((1, 2, 3))  # Tuple as custom data structure
+
+# Pop elements from the heap
+print(heap.pop())  # Output: 5.5
+print(heap.pop())  # Output: 10
+print(heap.pop())  # Output: hello
+print(heap.pop())  # Output: (1, 2, 3)
+
+# Pushing and popping empty heap
+heap.push(3)
+print(heap.pop())  # Output: 3
+
+# Trying to pop from an empty heap
+print(heap.pop())  # Output: None
